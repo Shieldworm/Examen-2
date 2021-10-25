@@ -91,3 +91,58 @@ lass Producto
                     break;
                 }
             }
+ /* Console.WriteLine("Escribe un valor y luego presiona enter");
+
+         double num1 = LeerNumero();
+         Console.WriteLine("Escribe otro valor y luego presiona enter");
+
+         double num2 = LeerNumero();
+
+         Console.WriteLine("Escoger una opcion de la siguiente lista");
+
+         Console.WriteLine("\ta - Sumar");
+         Console.WriteLine("\tb- Restar");
+         Console.WriteLine("\tc- Multiplicar");
+         Console.WriteLine("\td - Dividir");
+         Console.Write("tu opcion ");
+
+         List<string> opciones = new List<String>();
+         opciones.Add("a");
+         opciones.Add("b");
+         opciones.Add("c");
+         opciones.Add("d");
+
+         Console.WriteLine(opciones);
+
+         String opcionSeleccionada = Leeropcion(opciones);
+
+         // Console.WriteLine("1: " + num1 + " 2: " + num2 + " Opcion: " + opcionSeleccionada);
+
+
+
+
+         switch (opcionSeleccionada)
+         {
+             case "a":
+                 Console.WriteLine($" tu resultado: {num1} + {num2} = " + (num1 + num2)); 
+                 break;
+             case "b":
+                 Console.WriteLine($" tu resultado: {num1} - {num2} = " + (num1 - num2)); 
+                 break;
+             case "c":
+                 Console.WriteLine($" tu resultado: {num1} * {num2} = " + (num1 * num2)); 
+                 break;
+             case "d":
+
+                 while (num2 == 0)
+                 {
+                     Console.WriteLine("ingresa un divisior diferente a 0:");
+                     num2 = LeerNumero();
+                 }
+                 Console.WriteLine($" tu resultado: {num1} /{num2} = " + (num1 / num2)); 
+                 break;
+
+         }
+         Console.WriteLine("Presiona cualquier teclada para salir de la aplicaicon");
+         Console.ReadKey(); 
+        */
