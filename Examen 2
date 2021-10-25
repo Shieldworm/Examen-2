@@ -1,0 +1,93 @@
+lass Producto
+    {
+        public string nombre;
+        public double precio;
+
+        public Producto (string nombre1, double precio1)
+        {
+            nombre = nombre1;
+            precio = precio1;
+        }
+    }
+    class Program
+        
+    {
+
+        static void Main(string[] args)
+        {
+            bool encendida = true;
+            
+
+            Console.WriteLine("Tienda de augusto");
+            Console.WriteLine("---------------------------");
+
+            List<Producto> productos = new List<Producto>();
+            productos.Add(new Producto("mayonesa", 1000));
+            productos.Add(new Producto("huevo", 200));
+            productos.Add(new Producto("leche", 1700));
+            productos.Add(new Producto("pan", 2000));
+            productos.Add(new Producto("queso", 1500));
+
+            while(encendida == true) 
+            { 
+
+            
+                Console.WriteLine("\ta - Buscar Producto");
+                Console.WriteLine("\tb- Suma Rapida de productos");
+                Console.WriteLine("\tc-  Pagar cuenta");
+                Console.WriteLine("\td - Consultar cuenta cliente ");
+                Console.WriteLine("\te - Actualizar cuenta cliente ");
+                Console.WriteLine("\tf - Calcular informe de ventas ");
+                Console.WriteLine("\tg - Calcular cartera de Clientes ");
+                Console.WriteLine("\th - Salir ");
+                Console.Write("tu opcion ");
+
+                List<string> opciones = new List<String>();
+                opciones.Add("a");
+                opciones.Add("b");
+                opciones.Add("c");
+                opciones.Add("d");
+                opciones.Add("e");
+                opciones.Add("f");
+                opciones.Add("g");
+                opciones.Add("h");
+
+                String opcionSeleccionada = Leeropcion(opciones);
+
+
+                switch (opcionSeleccionada)
+                {
+                    case "a":
+                    
+                        
+
+                        BuscarProducto(productos);
+                        break;
+
+                    case "b":
+
+                        List<double> precios = new List<double>();
+
+                         Console.WriteLine(" Escriba el preico o el nombre del producto");
+
+                        string buscar = Console.ReadLine();
+
+                        double precio;
+                       
+                        bool esNumero = double.TryParse(buscar, out precio);
+
+                        if (esNumero == true )
+                        {
+                            precios.Add(precio); 
+                        }
+                            
+
+                        break;
+
+
+                    case "h":
+
+                        encendida = false;
+                    break;
+                }
+            }
