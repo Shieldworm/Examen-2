@@ -146,3 +146,25 @@ lass Producto
          Console.WriteLine("Presiona cualquier teclada para salir de la aplicaicon");
          Console.ReadKey(); 
         */
+        
+         public static double LeerNumero() 
+            
+        {
+            double resultado = -1;
+            while (resultado == -1)
+            {
+
+
+                try
+                {
+                    resultado = Convert.ToDouble(Console.ReadLine());
+                }
+                catch (FormatException)
+
+                {
+                    Console.WriteLine("Ingresar un valor valido");
+                    
+                }
+            }
+            return resultado;
+        }
