@@ -187,3 +187,37 @@ lass Producto
             return opcionSeleccionada;
 
         }
+        
+         public static Producto BuscarProducto(List<Producto> productos )
+        {
+            
+            String productoBuscado = "" ;
+            bool productoEncontrado = false;
+            while (productoBuscado != "-1" && productoEncontrado == false)
+
+
+            {
+                Console.WriteLine("Escribir producto a buscar");
+                productoBuscado = Console.ReadLine();
+               
+                foreach (Producto prod in productos)
+                {
+                    if (productoBuscado == prod.nombre)
+                    {
+                        Console.WriteLine(prod.nombre + " " + prod.precio);
+                        productoEncontrado = true;                        
+                        return prod;
+                    }
+                    
+               }
+
+
+                if (productoEncontrado == false)
+                {
+                    Console.WriteLine(" Producto no encontrado");
+                    
+                }
+              
+            }
+            return  null;
+        }
