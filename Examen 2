@@ -221,3 +221,36 @@ lass Producto
             }
             return  null;
         }
+
+public static void sumaRapida ()
+        {
+            List<double> precios = new List<double>();
+
+            Console.WriteLine(" Escriba el preico o el nombre del producto");
+
+            string buscar = Console.ReadLine();
+
+            while(buscar != "+")
+            {
+
+           
+                double precio;
+
+                bool esNumero = double.TryParse(buscar, out precio);
+
+                if (esNumero == true)
+                {
+                    precios.Add(precio);
+                }
+                else
+                {
+
+                    Producto productoEncontrado = BuscarProducto(List<>);
+                    precios.Add(().precio);
+                }
+            }
+
+        }
+    }
+
+}
