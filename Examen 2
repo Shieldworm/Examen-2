@@ -168,3 +168,22 @@ lass Producto
             }
             return resultado;
         }
+        
+         public static String Leeropcion(List<String> opcionesValidas)
+        {
+            String opcionSeleccionada = Console.ReadLine();
+
+            bool esValida = opcionesValidas.Contains(opcionSeleccionada);
+
+            while (esValida == false)
+            {
+                Console.WriteLine("Ingresar un valor valido");
+
+                opcionSeleccionada = Console.ReadLine();
+                esValida = opcionesValidas.Contains(opcionSeleccionada);
+
+                
+            }
+            return opcionSeleccionada;
+
+        }
