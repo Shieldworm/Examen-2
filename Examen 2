@@ -241,7 +241,7 @@ namespace ConsoleApp3
                                 {
                                     double deudaTemporal = clienteActual.deuda;
                                     clienteActual.FiarCuenta();
-                                    Console.WriteLine("Deuda acutal de: " + deudaTemporal + "  fue agregada a cuenta cliente con el ID: "+clienteActual.id);
+                                    Console.WriteLine("Deuda acutal de: $" + deudaTemporal + "  fue agregada a cuenta cliente con el ID: "+clienteActual.id);
                                   
                                 }
 
@@ -272,7 +272,7 @@ namespace ConsoleApp3
                             double cuentaPagar = clienteEncontrado.cuenta;
                             if (cuentaPagar > 0)
                             {
-                                Console.WriteLine("Su saldo a favor es de: " + cuentaPagar);
+                                Console.WriteLine("Su saldo a favor es de: $" + cuentaPagar);
                             }
                             else if ( cuentaPagar == 0)
                             {
@@ -280,9 +280,9 @@ namespace ConsoleApp3
                             }
                             else
                             {
-                                Console.WriteLine("Su deuda es de:" + (cuentaPagar * -1));
+                                Console.WriteLine("Su deuda es de: $" + (cuentaPagar * -1));
                             }
-                            Console.WriteLine("estado de cuenta es: " + cuentaPagar);
+                            Console.WriteLine("estado de cuenta es: $" + cuentaPagar);
 
                         }
 
@@ -323,12 +323,12 @@ namespace ConsoleApp3
 
                                     if (resultado > 0)
                                     {
-                                        Console.WriteLine(" usted no debe nada y le sobro esto " + resultado);
+                                        Console.WriteLine(" usted no debe nada y le sobro esto $" + resultado);
                                     }
 
                                     else
                                     {
-                                        Console.WriteLine("Hizo un abono a su cuenta y su saldo actual es ahora: " + resultado);
+                                        Console.WriteLine("Hizo un abono a su cuenta y su saldo actual es ahora: $" + resultado);
                                         
                                     }
                                     clienteActual.cuenta = resultado;
@@ -345,7 +345,7 @@ namespace ConsoleApp3
                                 double montoSumar = LeerNumero();
                                 clienteActual.cuenta -= montoSumar;
 
-                                Console.WriteLine("Ya se le agrego a su cuenta, su nueva cuenta es igual a " + clienteActual.cuenta);
+                                Console.WriteLine("Ya se le agrego a su cuenta, su nueva cuenta es igual a $" + clienteActual.cuenta);
 
                                 break;
                         }
@@ -362,7 +362,7 @@ namespace ConsoleApp3
                             totalDeVentas += venta;
                         }
 
-                        Console.WriteLine("El total de ventas del dia es; " + totalDeVentas);
+                        Console.WriteLine("El total de ventas del dia es; $" + totalDeVentas);
                         break;
 
 
@@ -493,195 +493,6 @@ namespace ConsoleApp3
 
                   //  Producto productoEncontrado = BuscarProducto(List<>);
                    // precios.Add(().precio);
-                }
-            }
-
-        }
-    }
-
-}
-
-                        List<double> precios = new List<double>();
-
-                         Console.WriteLine(" Escriba el preico o el nombre del producto");
-
-                        string buscar = Console.ReadLine();
-
-                        double precio;
-                       
-                        bool esNumero = double.TryParse(buscar, out precio);
-
-                        if (esNumero == true )
-                        {
-                            precios.Add(precio); 
-                        }
-                            
-
-                        break;
-
-
-                    case "h":
-
-                        encendida = false;
-                    break;
-                }
-            }
- /* Console.WriteLine("Escribe un valor y luego presiona enter");
-
-         double num1 = LeerNumero();
-         Console.WriteLine("Escribe otro valor y luego presiona enter");
-
-         double num2 = LeerNumero();
-
-         Console.WriteLine("Escoger una opcion de la siguiente lista");
-
-         Console.WriteLine("\ta - Sumar");
-         Console.WriteLine("\tb- Restar");
-         Console.WriteLine("\tc- Multiplicar");
-         Console.WriteLine("\td - Dividir");
-         Console.Write("tu opcion ");
-
-         List<string> opciones = new List<String>();
-         opciones.Add("a");
-         opciones.Add("b");
-         opciones.Add("c");
-         opciones.Add("d");
-
-         Console.WriteLine(opciones);
-
-         String opcionSeleccionada = Leeropcion(opciones);
-
-         // Console.WriteLine("1: " + num1 + " 2: " + num2 + " Opcion: " + opcionSeleccionada);
-
-
-
-
-         switch (opcionSeleccionada)
-         {
-             case "a":
-                 Console.WriteLine($" tu resultado: {num1} + {num2} = " + (num1 + num2)); 
-                 break;
-             case "b":
-                 Console.WriteLine($" tu resultado: {num1} - {num2} = " + (num1 - num2)); 
-                 break;
-             case "c":
-                 Console.WriteLine($" tu resultado: {num1} * {num2} = " + (num1 * num2)); 
-                 break;
-             case "d":
-
-                 while (num2 == 0)
-                 {
-                     Console.WriteLine("ingresa un divisior diferente a 0:");
-                     num2 = LeerNumero();
-                 }
-                 Console.WriteLine($" tu resultado: {num1} /{num2} = " + (num1 / num2)); 
-                 break;
-
-         }
-         Console.WriteLine("Presiona cualquier teclada para salir de la aplicaicon");
-         Console.ReadKey(); 
-        */
-        
-         public static double LeerNumero() 
-            
-        {
-            double resultado = -1;
-            while (resultado == -1)
-            {
-
-
-                try
-                {
-                    resultado = Convert.ToDouble(Console.ReadLine());
-                }
-                catch (FormatException)
-
-                {
-                    Console.WriteLine("Ingresar un valor valido");
-                    
-                }
-            }
-            return resultado;
-        }
-        
-         public static String Leeropcion(List<String> opcionesValidas)
-        {
-            String opcionSeleccionada = Console.ReadLine();
-
-            bool esValida = opcionesValidas.Contains(opcionSeleccionada);
-
-            while (esValida == false)
-            {
-                Console.WriteLine("Ingresar un valor valido");
-
-                opcionSeleccionada = Console.ReadLine();
-                esValida = opcionesValidas.Contains(opcionSeleccionada);
-
-                
-            }
-            return opcionSeleccionada;
-
-        }
-        
-         public static Producto BuscarProducto(List<Producto> productos )
-        {
-            
-            String productoBuscado = "" ;
-            bool productoEncontrado = false;
-            while (productoBuscado != "-1" && productoEncontrado == false)
-
-
-            {
-                Console.WriteLine("Escribir producto a buscar");
-                productoBuscado = Console.ReadLine();
-               
-                foreach (Producto prod in productos)
-                {
-                    if (productoBuscado == prod.nombre)
-                    {
-                        Console.WriteLine(prod.nombre + " " + prod.precio);
-                        productoEncontrado = true;                        
-                        return prod;
-                    }
-                    
-               }
-
-
-                if (productoEncontrado == false)
-                {
-                    Console.WriteLine(" Producto no encontrado");
-                    
-                }
-              
-            }
-            return  null;
-        }
-
-public static void sumaRapida ()
-        {
-            List<double> precios = new List<double>();
-
-            Console.WriteLine(" Escriba el preico o el nombre del producto");
-
-            string buscar = Console.ReadLine();
-
-            while(buscar != "+")
-            {
-
-           
-                double precio;
-
-                bool esNumero = double.TryParse(buscar, out precio);
-
-                if (esNumero == true)
-                {
-                    precios.Add(precio);
-                }
-                else
-                {
-
-                    Producto productoEncontrado = BuscarProducto(List<>);
-                    precios.Add(().precio);
                 }
             }
 
