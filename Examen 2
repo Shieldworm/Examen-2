@@ -105,10 +105,15 @@ namespace ConsoleApp3
             { 
 
             
-                Console.WriteLine("\ta - Buscar Producto");
+                 Console.WriteLine("\ta - Buscar Producto");
+                // Se busca el producto de una lista creada el cual tiene valor nombre y valor precio
                 Console.WriteLine("\tb- Suma Rapida de productos");
+                // Despues de buscar el producto en la opcion a y conocer su precio, se puede hacer una suma rapida, ingresando el valor o el nombre del producto y finalizando la suma con el simbolo"+"
                 Console.WriteLine("\tc-  Pagar cuenta");
+                // pagar cuenta tiene dos opciones, pagar cuenta y fiar cuenta, la primera opcion pide ingresar el monto con el que se va a pagar, osea el billete con el que se paga 
+                // y se le resta la cuenta actual, para que asi el resultado sea la devuelta
                 Console.WriteLine("\td - Consultar cuenta cliente ");
+
                 Console.WriteLine("\te - Actualizar cuenta cliente ");
                 Console.WriteLine("\tf - Calcular informe de ventas ");
                 Console.WriteLine("\tg - Calcular cartera de Clientes ");
