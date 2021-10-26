@@ -1,4 +1,9 @@
-lass Producto
+using System;
+using System.Collections.Generic;
+
+namespace ConsoleApp3
+{
+    class Producto
     {
         public string nombre;
         public double precio;
@@ -9,6 +14,37 @@ lass Producto
             precio = precio1;
         }
     }
+
+    class Cliente
+    {
+        public string nombre;
+        public string apellido;
+        public double deuda;
+        public string id;
+        public double cuenta;
+
+        
+
+        public Cliente(string nombre1, string apellido1, string ID1, double cuenta1)
+        {
+            nombre = nombre1;
+            apellido = apellido1;
+            id = ID1;
+            deuda = 0;
+            cuenta = cuenta1;
+        }
+
+        public void SumarCuenta( double monto) 
+        {
+            deuda += monto;
+            
+        }
+        public void FiarCuenta()
+        {
+            cuenta -= deuda;
+            deuda = 0;
+        }
+    }
     class Program
         
     {
@@ -16,10 +52,44 @@ lass Producto
         static void Main(string[] args)
         {
             bool encendida = true;
-            
+            Cliente clienteActual = null;
+            List<double> ventasHoy = new List<double>();
+
+            List<Cliente> clientes = new List<Cliente>();
+
+            clientes.Add(new Cliente("Daniel", "Garcia", "10253", 0));
+            clientes.Add(new Cliente("Gabriel", "Diaz", "10254", -14500));
+            clientes.Add(new Cliente("Pedro", "Gaviria", "10255", -25300));
+
 
             Console.WriteLine("Tienda de augusto");
             Console.WriteLine("---------------------------");
+            Console.WriteLine("Escribir Nombre y apellido del cliente");
+            string nombreDelCliente = Console.ReadLine();
+            string[] partes = nombreDelCliente.Split(' ');
+            bool encontrado = false;
+            string nombreBuscar = partes[0];
+            string apellidoBuscar = partes[1];
+            
+            foreach (Cliente cliente in clientes)
+            {
+             
+                if (cliente.nombre == nombreBuscar && cliente.apellido == apellidoBuscar)
+                {
+                    clienteActual = cliente;
+
+                    encontrado = true;
+                    break;
+                }
+
+            }
+
+            if(encontrado == false) 
+            {
+                Console.WriteLine("Cliente no encontrado, ingresar cliente valido");
+               
+            }
+
 
             List<Producto> productos = new List<Producto>();
             productos.Add(new Producto("mayonesa", 1000));
@@ -28,7 +98,10 @@ lass Producto
             productos.Add(new Producto("pan", 2000));
             productos.Add(new Producto("queso", 1500));
 
-            while(encendida == true) 
+           
+        
+
+            while (encendida == true) 
             { 
 
             
@@ -58,13 +131,375 @@ lass Producto
                 switch (opcionSeleccionada)
                 {
                     case "a":
-                    
-                        
 
-                        BuscarProducto(productos);
+
+
+                        BuscarProducto(productos, "");
                         break;
 
                     case "b":
+
+                        List<double> precios = new List<double>();
+
+                        Console.WriteLine(" Escriba el precio o el nombre del producto o ponga `+` para sumar los anteriores valores");
+
+                        string buscar = Console.ReadLine();
+                        while (buscar != "+")
+                        {
+
+
+                            double precio;
+
+                            bool esNumero = double.TryParse(buscar, out precio);
+
+                            if (esNumero == true)
+                            {
+                                precios.Add(precio);
+                            }
+                            else
+                            {
+                                Producto productoEncontrado = BuscarProducto(productos, buscar);
+                                if (productoEncontrado != null)
+                                {
+                                    precios.Add(productoEncontrado.precio);
+                                }
+
+                            }
+                            Console.WriteLine(" Escriba el precio o el nombre del producto o ponga `+` para sumar los anteriores valores");
+                            buscar = Console.ReadLine();
+                        }
+
+                        Double total = 0;
+                        foreach (Double precio in precios)
+                        {
+                            total += precio;
+                            ventasHoy.Add(precio);
+
+                        }
+
+
+                        Console.WriteLine("El total de su suma es: " + total);
+                        if  (clienteActual != null)
+                        {
+                            
+                            clienteActual.SumarCuenta(total);
+                        }
+                       break;
+
+                    case "c":
+
+                        Console.WriteLine("Escoger opcion a hacer");
+                      
+                        
+                            Console.WriteLine("\ta - Pagar Cuenta");
+                            Console.WriteLine("\tb- Fiar cuenta");
+
+                        List<string> subOpciones = new List<String>();
+                        subOpciones.Add("a");
+                        subOpciones.Add("b");
+                        string subopcionSeleccionada = Leeropcion(subOpciones);
+                        switch (subopcionSeleccionada)
+
+                        {
+                            case "a":
+
+                                Console.WriteLine("Ingresar monto con el cual se va a pagar");
+
+                                double billete = LeerNumero();
+
+                                if (clienteActual.deuda == 0)
+                                {
+                                    Console.WriteLine("El cliente no debe nada");
+                                }
+                                else
+                                {
+                                    double resultado = billete - clienteActual.deuda;
+
+                                    if (resultado > 0)
+                                    {
+                                        Console.WriteLine(" Su devuelta es: $" + resultado);
+                                    }
+
+                                    else
+                                    {
+                                        Console.WriteLine("No debe nada");
+                                    }
+
+                                    Console.WriteLine("Gracias por su compra");
+                                }
+                                break;
+
+
+                            case "b":
+
+
+                                if (clienteActual.deuda == 0)
+                                {
+                                    Console.WriteLine("El cliente no debe nada");
+                                }
+                                else
+                                {
+                                    double deudaTemporal = clienteActual.deuda;
+                                    clienteActual.FiarCuenta();
+                                    Console.WriteLine("Deuda acutal de: " + deudaTemporal + "  fue agregada a cuenta cliente con el ID: "+clienteActual.id);
+                                  
+                                }
+
+                                break;
+                        }
+
+
+                        break;
+
+                    case "d":
+
+                        Console.WriteLine("Ingrese el ID del Usuario a consultar ");
+                        string idBuscado = Console.ReadLine();
+                        Cliente clienteEncontrado = null;
+                        foreach (Cliente cliente in clientes)
+                        {
+
+                            if (cliente.id == idBuscado)
+                            {
+                                clienteEncontrado = cliente;
+                                break;
+                            }
+
+                        }
+
+                        if ( clienteEncontrado != null)
+                        {
+                            double cuentaPagar = clienteEncontrado.cuenta;
+                            if (cuentaPagar > 0)
+                            {
+                                Console.WriteLine("Su saldo a favor es de: " + cuentaPagar);
+                            }
+                            else if ( cuentaPagar == 0)
+                            {
+                                Console.WriteLine("Estas a paz y salvo " );
+                            }
+                            else
+                            {
+                                Console.WriteLine("Su deuda es de:" + (cuentaPagar * -1));
+                            }
+                            Console.WriteLine("estado de cuenta es: " + cuentaPagar);
+
+                        }
+
+                        else
+                        {
+                            Console.WriteLine("Cliente no encontrado");
+                        }
+                        break;
+
+                    case "e":
+
+                        Console.WriteLine("Escoger opcion a hacer");
+
+
+                        Console.WriteLine("\ta - Pagar Deuda");
+                        Console.WriteLine("\tb- Agregar Deuda");
+
+                        subOpciones = new List<String>();
+                        subOpciones.Add("a");
+                        subOpciones.Add("b");
+                        subopcionSeleccionada = Leeropcion(subOpciones);
+                        switch (subopcionSeleccionada)
+
+                        {
+                            case "a":
+
+                                Console.WriteLine("Ingresar monto pagado ");
+
+                                double billete = LeerNumero();
+
+                                if (clienteActual.cuenta >= 0) 
+                                {
+                                    Console.WriteLine("Usted no debe nada");
+                                }
+                                else
+                                {
+                                    double resultado = billete + clienteActual.cuenta;
+
+                                    if (resultado > 0)
+                                    {
+                                        Console.WriteLine(" usted no debe nada y le sobro esto " + resultado);
+                                    }
+
+                                    else
+                                    {
+                                        Console.WriteLine("Hizo un abono a su cuenta y su saldo actual es ahora: " + resultado);
+                                        
+                                    }
+                                    clienteActual.cuenta = resultado;
+
+
+                                }
+                                break;
+
+
+                            case "b":
+
+
+                                Console.WriteLine("Ingrese monto a sumar a la cuenta: ");
+                                double montoSumar = LeerNumero();
+                                clienteActual.cuenta -= montoSumar;
+
+                                Console.WriteLine("Ya se le agrego a su cuenta, su nueva cuenta es igual a " + clienteActual.cuenta);
+
+                                break;
+                        }
+
+                        break;
+
+                    case "f":
+
+                        Console.WriteLine("Estos fueron los movimientos del dia");
+                        double totalDeVentas = 0;
+                        foreach (double venta in ventasHoy)
+                        {
+                            Console.WriteLine("+" + venta);
+                            totalDeVentas += venta;
+                        }
+
+                        Console.WriteLine("El total de ventas del dia es; " + totalDeVentas);
+                        break;
+
+
+                    case "g":
+
+                        foreach (Cliente cliente in clientes)
+                        {
+                            if (cliente.cuenta < 0)
+                            {
+                                Console.WriteLine(cliente.nombre + " debe $" + (cliente.cuenta * -1));
+                            }
+                        }
+                        break;
+
+
+                    case "h":
+
+                        encendida = false;
+                    break;
+
+                        
+                }
+            }
+
+
+
+        
+        }
+
+        public static double LeerNumero() 
+            
+        {
+            double resultado = -1;
+            while (resultado == -1)
+            {
+
+
+                try
+                {
+                    resultado = Convert.ToDouble(Console.ReadLine());
+                }
+                catch (FormatException)
+
+                {
+                    Console.WriteLine("Ingresar un valor valido");
+                    
+                }
+            }
+            return resultado;
+        }
+
+        public static String Leeropcion(List<String> opcionesValidas)
+        {
+            String opcionSeleccionada = Console.ReadLine();
+
+            bool esValida = opcionesValidas.Contains(opcionSeleccionada);
+
+            while (esValida == false)
+            {
+                Console.WriteLine("Ingresar un valor valido");
+
+                opcionSeleccionada = Console.ReadLine();
+                esValida = opcionesValidas.Contains(opcionSeleccionada);
+
+                
+            }
+            return opcionSeleccionada;
+
+        }
+
+        public static Producto BuscarProducto(List<Producto> productos , string nombreBuscado)
+        {
+            
+            String productoBuscado = nombreBuscado ;
+            bool productoEncontrado = false;
+            while (productoBuscado != "-1" && productoEncontrado == false)
+            {
+                if (productoBuscado == "")
+                {
+                    Console.WriteLine("Escribir producto a buscar");
+                    productoBuscado = Console.ReadLine();
+                }
+                
+               
+                foreach (Producto prod in productos)
+                {
+                    if (productoBuscado == prod.nombre)
+                    {
+                        Console.WriteLine(prod.nombre + " " + prod.precio);
+                        productoEncontrado = true;                        
+                        return prod;
+                    }
+                    
+               }
+                if (productoEncontrado == false)
+                {
+                    Console.WriteLine(" Producto no encontrado");
+                    
+                }
+                productoBuscado = "";
+            }
+            return  null;
+        }
+
+
+        public static void sumaRapida ()
+        {
+            List<double> precios = new List<double>();
+
+            Console.WriteLine(" Escriba el precio o el nombre del producto");
+
+            string buscar = Console.ReadLine();
+
+            while(buscar != "+")
+            {
+
+           
+                double precio;
+
+                bool esNumero = double.TryParse(buscar, out precio);
+
+                if (esNumero == true)
+                {
+                    precios.Add(precio);
+                }
+                else
+                {
+
+                  //  Producto productoEncontrado = BuscarProducto(List<>);
+                   // precios.Add(().precio);
+                }
+            }
+
+        }
+    }
+
+}
 
                         List<double> precios = new List<double>();
 
