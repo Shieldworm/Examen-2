@@ -110,14 +110,18 @@ namespace ConsoleApp3
                 Console.WriteLine("\tb- Suma Rapida de productos");
                 // Despues de buscar el producto en la opcion a y conocer su precio, se puede hacer una suma rapida, ingresando el valor o el nombre del producto y finalizando la suma con el simbolo"+"
                 Console.WriteLine("\tc-  Pagar cuenta");
-                // pagar cuenta tiene dos opciones, pagar cuenta y fiar cuenta, la primera opcion pide ingresar el monto con el que se va a pagar, osea el billete con el que se paga 
-                // y se le resta la cuenta actual, para que asi el resultado sea la devuelta
+                /* pagar cuenta tiene dos opciones, pagar cuenta y fiar cuenta, la primera opcion pide ingresar el monto con el que se va a pagar, osea el billete con el que se paga 
+                 y se le resta la cuenta actual, para que asi el resultado sea la devuelta */
                 Console.WriteLine("\td - Consultar cuenta cliente ");
-
+                // Pide el id del cliente para revisar su cuent, si su cuenta es igual a 0 dice que esta a paz y salvo, si su cuenta es mayor a 0 dice su saldo a favor y si su cuenta es menor a 0, dice su deuda.
                 Console.WriteLine("\te - Actualizar cuenta cliente ");
+                // Pide dos opciones pagar deuda o agregar deuda, la primera lo que hace es restarle a la deuda de la cuenta cliente el pago que se va a hacer
                 Console.WriteLine("\tf - Calcular informe de ventas ");
+                // En esta opcion lo que se hace es hacer un repaso por la lista de ventas del dia e imprimir todos los valores que se han hecho mientras la sesion a estado abierta con un total
                 Console.WriteLine("\tg - Calcular cartera de Clientes ");
+                // Con esta opcion lo que se hace es hacer un repaso por la lista de todos los clientes e imprimir los que tengan una deuda mayor a 0 
                 Console.WriteLine("\th - Salir ");
+                // Con esta se sale de la consola
                 Console.Write("tu opcion ");
 
                 List<string> opciones = new List<String>();
